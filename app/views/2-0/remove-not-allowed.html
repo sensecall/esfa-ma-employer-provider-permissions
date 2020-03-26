@@ -1,0 +1,48 @@
+{% extends "layout_das.html" %}
+{% set serviceName = "Manage apprenticeships" %}
+
+{% set pageName = "Your organisations and agreements" %}
+
+{% block pageTitle %}
+{{pageName}} - Manage apprentices
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBreadcrumbs({
+	items: [
+	{
+		text: "Home",
+		href: "#"
+	},
+	{
+		text: pageName,
+		href: "organisations"
+	},
+	{
+		text: "Remove organisation"
+	}
+	]
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		<h1 class="govuk-heading-l">
+			You cannot remove {{data['name']}}
+		</h1>
+
+		<p>
+			This is because {{data['name']}} has apprenticeships in progress.
+		</p>
+
+		{{govukButton({
+			classes: "govuk-!-margin-top-4",
+			href: "organisations",
+			text: "Return to your organisations and agreements"
+		})}}
+	</div>
+</div>
+
+{% endblock %}

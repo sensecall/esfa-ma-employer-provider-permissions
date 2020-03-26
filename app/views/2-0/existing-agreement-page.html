@@ -1,0 +1,31 @@
+{% extends "layout_das.html" %}
+
+{% set serviceName = "Manage apprenticeships" %}
+
+{% block pageTitle %}
+Agreement - Manage apprentices
+{% endblock %}
+
+{% block beforeContent %}
+{{govukBackLink({
+  href: ""
+})}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      Existing agreement page
+    </h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+  	<p>
+  		The existing 'do you accept this agreement' page here.
+  </div>
+</div>
+
+{% endblock %}

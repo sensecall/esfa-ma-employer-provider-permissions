@@ -1,0 +1,56 @@
+
+{% extends "layout.html" %}
+
+{% block serviceName %}
+Manage apprenticeships
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		<h1 class="govuk-heading-xl">
+			Config
+		</h1>
+
+		<form method="post">
+		{{ govukInput({
+			label:
+			{
+				text: "Number of organisations"
+			},
+			classes: "govuk-input--width-10",
+			id: "orgs-count",
+			name: "orgs-count",
+			inputmode: "numeric",
+			pattern: "[0-9]*",
+			attributes:
+			{
+				spellcheck: "false"
+			}
+		}) }}
+
+		{{ govukInput({
+			label:
+			{
+				text: "Number of providers"
+			},
+			classes: "govuk-input--width-10",
+			id: "providers-count",
+			name: "providers-count",
+			inputmode: "numeric",
+			pattern: "[0-9]*",
+			attributes:
+			{
+				spellcheck: "false"
+			}
+		}) }}
+
+		{{govukButton({
+			text: "Save"
+		})}}
+	</form>
+	</div>
+</div>
+
+{% endblock %}
