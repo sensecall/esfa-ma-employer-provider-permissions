@@ -1,0 +1,80 @@
+{% extends "layout_das.html" %}
+{% set serviceName = "Manage apprenticeships" %}
+
+{% set pageName = "Your organisations and agreements" %}
+
+{% block pageTitle %}
+{{pageName}} - Manage apprentices
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBreadcrumbs({
+  items: [
+  {
+    text: "Home",
+    href: "#"
+  },
+  {
+    text: pageName,
+    href: "organisations"
+  },
+  {
+    text: "Remove organisation"
+  }
+  ]
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		{{ govukErrorSummary({
+			titleText: "There is a problem",
+			errorList: [
+			{
+				text: "Select yes if you want to remove " + data['name'],
+				href: "#confirm-error"
+			}
+			]
+		}) }}
+
+		{% call govukFieldset({
+			legend:
+			{
+				text: "Are you sure you want to remove " + data['name'] + "?",
+				isPageHeading: true,
+				classes: "govuk-fieldset__legend--xl"
+			}
+		}) %}
+		<p>
+			This will end {{data['name']}}’s agreement with ESFA.
+		</p>
+
+		{{ govukRadios({
+			idPrefix: "confirm-error",
+			name: "confirm-error",
+			errorMessage:
+			{
+				text: "Select yes if you want to remove " + data['name']
+			},
+			items: [
+			{
+				value: "yes",
+				text: "Yes"
+			},
+			{
+				value: "no",
+				text: "No"
+			}
+			]
+		}) }}
+		{% endcall %}
+
+		{{govukButton({
+			text: "Continue"
+		})}}
+	</div>
+</div>
+
+{% endblock %}

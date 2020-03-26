@@ -1,0 +1,496 @@
+{% extends "layout_das.html" %}
+
+{% set serviceName = "Manage apprenticeships" %}
+
+{% set pageName = "Your agreements with the Education and Skills Funding Agency (ESFA)" %}
+
+{% block pageTitle %}
+Employer agreements - Manage apprentices
+{% endblock %}
+
+{% block beforeContent %}
+<!-- {{govukBackLink({
+  href: ""
+})}} -->
+
+{{ govukBreadcrumbs({
+  items: [
+  {
+    text: "Home",
+    href: "#"
+  },
+  {
+    text: "Your organisations and agreements",
+    href: "organisations"
+  },
+  {
+    text: data['name']
+  }
+  ]
+}) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      <span class="govuk-caption-l">{{data['name']}}</span>
+      {{pageName}}
+    </h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    {% set signedAgreement1Html %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-!-margin-0">
+          <strong class="govuk-tag govuk-tag--green govuk-!-font-size-19" style="vertical-align: middle"><span class="govuk-visually-hidden">This agreement was </span>accepted on [[DATE]]<span class="govuk-visually-hidden">.</span></strong>
+        </p>
+
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-4">
+          ESFA Apprenticeship Agreement for Employers
+          <span class="govuk-caption-m">Published [[DATE]]</span>
+        </h2>
+
+        {{ govukInsetText({
+          html: "This is a new agreement."
+        }) }}
+
+        <p>
+          This agreement allows you to spend funds for <b>{{data['name']}}</b>.
+        </p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row agreement-parties">
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m section-heading">Parties</h2>
+      </div>
+
+      <div class="govuk-grid-column-one-third">
+        <p>
+          <b>The Secretary of State for Education acting through the Education and Skills Funding Agency an executive agency of the Department for Education</b>
+          <br>
+          Cheylesmore House<br>
+          Quinton Road<br>
+          Coventry<br>
+          CV1 2WT
+        </p>
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        <p>
+          <strong>{{data['name']}}</strong><br>
+          Unit A 10 Fashion Street<br>London<br>E1 6PX<br>
+          <p class="update-details">
+            <a href="/accounts/V4G7P7/organisations/review?HashedAgreementId=V8JR7B&amp;AccountLegalEntityPublicHashedId=Y3EVEP">Update these details</a>
+          </p>
+        </p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m section-heading">Document</h2>
+      </div>
+
+      <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-!-display-inline-block govuk-!-margin-right-4">
+          <a aria-hidden="true" href="#"><img alt="" width="90" src="/public/images/pub-cover-html.png" style="box-shadow:0 1px 1px #aaa, 0 0 0 4px #ddd;"></a>
+        </div>
+
+        <div class="govuk-!-display-inline-block" style="vertical-align: top">
+          <h2 class="govuk-heading-m govuk-!-margin-bottom-2 govuk-!-font-weight-regular"><a href="/accounts/V4G7P7/agreements/V8JR7B/view">Your ESFA agreement</a></h2>
+          <p class="govuk-body-s">
+            <span class="type">HTML</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-m">This agreement has been accepted</h3>
+
+        {{ govukTable({
+          firstCellIsHeader: true,
+          rows: [
+          [
+          {
+            text: "Accepted by:"
+          },
+          {
+            text: "paul peterson"
+          }
+          ],
+          [
+          {
+            text: "On behalf of:"
+          },
+          {
+            text: data['name']
+          }
+          ],
+          [
+          {
+            text: "Address:"
+          },
+          {
+            text: "Unit A 10 Fashion Street , London, E1 6PX"
+          }
+          ],
+          [
+          {
+            text: "Accepted on:"
+          },
+          {
+            text: "29 January 2020"
+          }
+          ],
+          [
+          {
+            text: "Agreement ID:"
+          },
+          {
+            text: ["R1GOA9","SIWIR6","A3KBRF","0O67F0","ALZTA2","MJ6GN6","GMA7D2","YRQHQB","I86E41","204BDH"] | random
+          }
+          ]
+          ]
+        }) }}
+      </div>
+    </div>
+    {% endset -%}
+
+    {% set signedAgreement2Html %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-!-margin-0">
+          <strong class="govuk-tag govuk-tag--green govuk-!-font-size-19" style="vertical-align: middle"><span class="govuk-visually-hidden">This agreement was </span>accepted on [[DATE]]<span class="govuk-visually-hidden">.</span></strong>
+        </p>
+
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-4">
+          ESFA Apprenticeship Agreement for Employers
+          <span class="govuk-caption-m">Published 1 May 2018</span>
+        </h2>
+
+        {{ govukInsetText({
+          html: "This is a variation of the agreement that we published 1 May 2017.<br>We updated it to add clause 7 (transfer of funding)."
+        }) }}
+
+        <p>
+          This agreement allows you to spend funds for <b>{{data['name']}}</b>.
+        </p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row agreement-parties">
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m section-heading">Parties</h2>
+      </div>
+
+      <div class="govuk-grid-column-one-third">
+        <p>
+          <b>The Secretary of State for Education acting through the Education and Skills Funding Agency an executive agency of the Department for Education</b>
+          <br>
+          Cheylesmore House<br>
+          Quinton Road<br>
+          Coventry<br>
+          CV1 2WT
+        </p>
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        <p>
+          <strong>{{data['name']}}</strong><br>
+          Unit A 10 Fashion Street<br>London<br>E1 6PX<br>
+          <p class="update-details">
+            <a href="/accounts/V4G7P7/organisations/review?HashedAgreementId=V8JR7B&amp;AccountLegalEntityPublicHashedId=Y3EVEP">Update these details</a>
+          </p>
+        </p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m section-heading">Document</h2>
+      </div>
+
+      <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-!-display-inline-block govuk-!-margin-right-4">
+          <a aria-hidden="true" href="#"><img alt="" width="90" src="/public/images/pub-cover-html.png" style="box-shadow:0 1px 1px #aaa, 0 0 0 4px #ddd;"></a>
+        </div>
+
+        <div class="govuk-!-display-inline-block" style="vertical-align: top">
+          <h2 class="govuk-heading-m govuk-!-margin-bottom-2 govuk-!-font-weight-regular"><a href="/accounts/V4G7P7/agreements/V8JR7B/view">Your ESFA agreement</a></h2>
+          <p class="govuk-body-s">
+            <span class="type">HTML</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-m">This agreement has been accepted</h3>
+
+        {{ govukTable({
+          firstCellIsHeader: true,
+          rows: [
+          [
+          {
+            text: "Accepted by:"
+          },
+          {
+            text: "paul peterson"
+          }
+          ],
+          [
+          {
+            text: "On behalf of:"
+          },
+          {
+            text: data['name']
+          }
+          ],
+          [
+          {
+            text: "Address:"
+          },
+          {
+            text: "Unit A 10 Fashion Street , London, E1 6PX"
+          }
+          ],
+          [
+          {
+            text: "Accepted on:"
+          },
+          {
+            text: "29 January 2020"
+          }
+          ],
+          [
+          {
+            text: "Agreement ID:"
+          },
+          {
+            text: ["R1GOA9","SIWIR6","A3KBRF","0O67F0","ALZTA2","MJ6GN6","GMA7D2","YRQHQB","I86E41","204BDH"] | random
+          }
+          ]
+          ]
+        }) }}
+      </div>
+    </div>
+    {% endset -%}
+
+    {% set signedAgreement3Html %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-!-margin-0">
+          <strong class="govuk-tag govuk-tag--green govuk-!-font-size-19" style="vertical-align: middle"><span class="govuk-visually-hidden">This agreement was </span>accepted on [[DATE]]<span class="govuk-visually-hidden">.</span></strong>
+        </p>
+
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-4">
+          ESFA Apprenticeship Agreement for Employers
+          <span class="govuk-caption-m">Published 1 May 2017</span>
+        </h2>
+
+        <p>
+          This agreement allows you to spend funds for <b>{{data['name']}}</b>.
+        </p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row agreement-parties">
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m section-heading">Parties</h2>
+      </div>
+
+      <div class="govuk-grid-column-one-third">
+        <p>
+          <b>The Secretary of State for Education acting through the Education and Skills Funding Agency an executive agency of the Department for Education</b>
+          <br>
+          Cheylesmore House<br>
+          Quinton Road<br>
+          Coventry<br>
+          CV1 2WT
+        </p>
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        <p>
+          <strong>{{data['name']}}</strong><br>
+          Unit A 10 Fashion Street<br>London<br>E1 6PX<br>
+          <p class="update-details">
+            <a href="/accounts/V4G7P7/organisations/review?HashedAgreementId=V8JR7B&amp;AccountLegalEntityPublicHashedId=Y3EVEP">Update these details</a>
+          </p>
+        </p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m section-heading">Document</h2>
+      </div>
+
+      <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-!-display-inline-block govuk-!-margin-right-4">
+          <a aria-hidden="true" href="#"><img alt="" width="90" src="/public/images/pub-cover-html.png" style="box-shadow:0 1px 1px #aaa, 0 0 0 4px #ddd;"></a>
+        </div>
+
+        <div class="govuk-!-display-inline-block" style="vertical-align: top">
+          <h2 class="govuk-heading-m govuk-!-margin-bottom-2 govuk-!-font-weight-regular"><a href="/accounts/V4G7P7/agreements/V8JR7B/view">Your ESFA agreement</a></h2>
+          <p class="govuk-body-s">
+            <span class="type">HTML</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-m">This agreement has been accepted</h3>
+
+        {{ govukTable({
+          firstCellIsHeader: true,
+          rows: [
+          [
+          {
+            text: "Accepted by:"
+          },
+          {
+            text: "paul peterson"
+          }
+          ],
+          [
+          {
+            text: "On behalf of:"
+          },
+          {
+            text: data['name']
+          }
+          ],
+          [
+          {
+            text: "Address:"
+          },
+          {
+            text: "Unit A 10 Fashion Street , London, E1 6PX"
+          }
+          ],
+          [
+          {
+            text: "Accepted on:"
+          },
+          {
+            text: "29 January 2020"
+          }
+          ],
+          [
+          {
+            text: "Agreement ID:"
+          },
+          {
+            text: ["R1GOA9","SIWIR6","A3KBRF","0O67F0","ALZTA2","MJ6GN6","GMA7D2","YRQHQB","I86E41","204BDH"] | random
+          }
+          ]
+          ]
+        }) }}
+      </div>
+    </div>
+    {% endset -%}
+
+    {% set unsignedLatestAgreementHtml %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-!-margin-0">
+          <strong class="govuk-tag govuk-tag--red govuk-!-font-size-19" style="vertical-align: middle"><span class="govuk-visually-hidden">This agreement has </span>not <span class="govuk-visually-hidden">been </span>accepted yet<span class="govuk-visually-hidden">.</span></strong>
+        </p>
+
+        <h2 class="govuk-heading-l">
+          Agreement between {{data['name']}} and ESFA<span class="govuk-visually-hidden">: </span>
+          <span class="govuk-caption-m">Published 9 January 2020</span>
+        </h2>
+
+        {{ govukInsetText({
+          html: "This is a new agreement."
+        }) }}
+
+        <h3 class="govuk-heading-m">
+          About the agreement
+        </h3>
+        <p>
+          This agreement creates a legal contract between {{data['name']}} and ESFA. It allows you to transfer funds to other employers and pay training providers for apprenticeships.
+        </p>
+        <p>
+          You need to ensure you have authority from your organisation before you accept this agreement on their behalf.
+        </p>
+
+        <p>
+          <a href="existing-agreement-page" class="govuk-button">View agreement</a>
+        </p>
+      </div>
+    </div>
+    {% endset %}
+
+    <div class="govuk-tabs das-tabs das-tabs--small" data-module="govuk-tabs">
+      <h2 class="govuk-tabs__title">
+        Contents
+      </h2>
+
+      <ul class="govuk-tabs__list" role="tablist">        
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected" role="presentation">
+          <a class="govuk-tabs__tab" href="#past-day" id="tab_past-day" role="tab" aria-controls="past-day" aria-selected="true" tabindex="0">
+            <span class="govuk-visually-hidden">Agreement </span><span style="text-transform: uppercase;">p</span>ublished 9 January 2020</span>
+          </a>
+        </li>
+
+        <li class="govuk-tabs__list-item" role="presentation">
+          <a class="govuk-tabs__tab" href="#past-week" id="tab_past-week" role="tab" aria-controls="past-week" aria-selected="false" tabindex="-1">
+            <span class="govuk-visually-hidden">Agreement </span><span style="text-transform: uppercase;">p</span>ublished 1 May 2018
+          </a>
+        </li>
+
+        <li class="govuk-tabs__list-item" role="presentation">
+          <a class="govuk-tabs__tab" href="#past-month" id="tab_past-month" role="tab" aria-controls="past-month" aria-selected="false" tabindex="-1">
+            <span class="govuk-visually-hidden">Agreement </span><span style="text-transform: uppercase;">p</span>ublished 1 May 2017
+          </a>
+        </li>
+      </ul>
+
+      <div class="govuk-tabs__panel" id="past-day" role="tabpanel" aria-labelledby="tab_past-day">        
+        {{signedAgreement1Html | safe if data['signed'] == 'true' else unsignedLatestAgreementHtml | safe}}
+      </div>
+
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-week" role="tabpanel" aria-labelledby="tab_past-week">
+        {{signedAgreement2Html | safe}}    
+      </div>    
+
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-month" role="tabpanel" aria-labelledby="tab_past-month">
+        {{signedAgreement3Html | safe}}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

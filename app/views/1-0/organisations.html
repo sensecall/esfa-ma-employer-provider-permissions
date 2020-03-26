@@ -1,0 +1,83 @@
+{% extends "layout_das.html" %}
+{% set serviceName = "Manage apprenticeships" %}
+
+{% set pageName = "Your training providers" %}
+
+{% block pageTitle %}
+{{pageName}} - Manage apprentices
+{% endblock %}
+
+{% block beforeContent %}
+<!-- {{govukBackLink({
+  href: ""
+})}} -->
+
+{{ govukBreadcrumbs({
+  items: [
+  {
+    text: "Home",
+    href: "#"
+  },
+  {
+    text: pageName
+  }
+  ]
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      {{pageName}}
+    </h1>
+    <p>
+      You can add a training provider, then set permissions to choose what they can do on your behalf.
+    </p>
+    <p class="govuk-!-margin-bottom-8">
+      <a href="#" class="govuk-button govuk-!-margin-bottom-0">Add a training provider</a>
+    </p>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {% for provider in range(0, data['providers-count']) %}
+    <table class="govuk-table govuk-!-font-size- govuk-!-margin-bottom-8">
+      <caption class="govuk-table__caption govuk-heading-l">Coventry College</caption>
+
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header govuk-!-width-one-third">Organisation</th>
+          <th scope="col" class="govuk-table__header">Permissions</th>
+          <th scope="col" class="govuk-table__header" colspan="2"><span class="govuk-visually-hidden">Actions</span></th>
+        </tr>
+      </thead>
+
+      <tbody class="govuk-table__body">
+        {% for organisation in range(0, data['orgs-count']) %}
+        {% set name = data['businesses'][data['random-businesses'][loop.index0]] %}
+        {% set x = true if loop.index != 1 %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">{{name}}</td>
+          <td class="govuk-table__cell">
+            <ul class="govuk-list govuk-!-margin-0">
+              <li class="govuk-!-margin-0">Add apprentice records</li>
+              <li class="govuk-!-margin-0">Recruit apprentices</li>
+            </td>
+            <td class="govuk-table__cell"><a href="remove?name={{name}}">Change permissions</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endfor %}
+
+      {{govukDetails({
+        summaryText: "How transfers status is worked out",
+        text: "Transfers are enabled if all the organisations in your account have accepted the latest agreement."
+      })}}
+    </div>
+  </div>
+
+  {% endblock %}

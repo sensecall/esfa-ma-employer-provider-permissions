@@ -1,0 +1,7 @@
+.das-tabs {
+	&.das-tabs--small {
+		.govuk-tabs__list-item {
+			@include govuk-font($size: 16);
+		}
+	}
+}
