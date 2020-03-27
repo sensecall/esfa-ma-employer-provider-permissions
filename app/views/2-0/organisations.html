@@ -74,53 +74,64 @@
     {% else %}
     {% for provider in range(0, data['providers-count']) %}
     {% set providerName = data['providers'][data['random-providers'][loop.index0]]['name'] %}
-    <table class="govuk-table govuk-!-margin-bottom-4 govuk-!-margin-top-4">
-      <caption class="govuk-table__caption govuk-heading-l">{{providerName}}</caption>
+    <div class="multi-table-wrapper" style="position: relative;">
+      <h2 class="govuk-heading-l govuk-!-padding-bottom-1 govuk-!-padding-top-1" style="position: -webkit-sticky; position: sticky; top: 0; background: #fff; z-index: 999;">{{providerName}}</h2>
 
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th scope="col" class="govuk-table__header app-multi-select__select-all-container"></th>
-          <th scope="col" class="govuk-table__header govuk-!-width-one-third">Organisation</th>
-          <th scope="col" class="govuk-table__header">Permissions</th>
-          <th scope="col" class="govuk-table__header" colspan="2"><span class="govuk-visually-hidden">Actions</span></th>
-        </tr>
-      </thead>
+      <table class="govuk-table govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header app-multi-select__select-all-container"></th>
+            <th scope="col" class="govuk-table__header govuk-!-width-one-third">Organisation</th>
+            <th scope="col" class="govuk-table__header">Permissions</th>
+            <th scope="col" class="govuk-table__header" colspan="2"><span class="govuk-visually-hidden">Actions</span></th>
+          </tr>
+        </thead>
 
-      <tbody class="govuk-table__body">
-        {% for organisation in range(0, data['orgs-count']) %}
-        {% set organisationName = data['businesses'][data['random-businesses'][loop.index0]] %}
-        <tr class="govuk-table__row">
-          <td class="govuk-table__cell">
-            <div class="govuk-checkboxes govuk-checkboxes--small govuk-!-margin-0 govuk-!-padding-0">
-              <div class="govuk-checkboxes__item govuk-!-margin-0 govuk-!-padding-0">
-                <input class="govuk-checkboxes__input govuk-!-margin-0 govuk-!-padding-0" id="organisation-{{loop.index}}" name="organisation" type="checkbox" value="{{organisationName}}">
-                <label class="govuk-label govuk-checkboxes__label" for="organisation-{{loop.index}}">
-                  <span class="govuk-visually-hidden">Select {{organisationName}}</span>
-                </label>
+        <tbody class="govuk-table__body">
+          {% for organisation in range(0, data['orgs-count']) %}
+          {% set organisationName = data['businesses'][data['random-businesses'][loop.index0]] %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <div class="govuk-checkboxes govuk-checkboxes--small govuk-!-margin-0 govuk-!-padding-0">
+                <div class="govuk-checkboxes__item govuk-!-margin-0 govuk-!-padding-0">
+                  <input class="govuk-checkboxes__input govuk-!-margin-0 govuk-!-padding-0" id="organisation-{{loop.index}}" name="organisation" type="checkbox" value="{{organisationName}}">
+                  <label class="govuk-label govuk-checkboxes__label" for="organisation-{{loop.index}}">
+                    <span class="govuk-visually-hidden">Select {{organisationName}}</span>
+                  </label>
+                </div>
               </div>
-            </div>
-          </td>
+            </td>
 
-          <td class="govuk-table__cell">
-            {{organisationName}}
-          </td>
+            <td class="govuk-table__cell">
+              {{organisationName}}
+            </td>
 
-          <td class="govuk-table__cell">
-            <ul class="govuk-list govuk-!-margin-0">
-              <li class="govuk-!-margin-0">Add apprentice records</li>
-              <li class="govuk-!-margin-0">Recruit apprentices</li>
-            </ul>
-          </td>
-          <td class="govuk-table__cell"><a href="remove?name={{name}}">Change permissions<span class="govuk-visually-hidden"> for {{name}}</span></a></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    {{govukButton({
-      text: "Set permissions for " + providerName,
-      classes: "govuk-!-margin-bottom-8"
-    })}}
+            <td class="govuk-table__cell">
+              <ul class="govuk-list govuk-!-margin-0">
+                <li class="govuk-!-margin-0">Add apprentice records</li>
+                <li class="govuk-!-margin-0">Recruit apprentices</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><a href="remove?name={{name}}">Change permissions<span class="govuk-visually-hidden"> for {{name}}</span></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      <div class="govuk-!-margin-bottom-9">
+        {{govukButton({
+          text: "Set permissions for " + providerName,
+          classes: "govuk-!-margin-bottom-0 govuk-!-display-inline-block govuk-!-margin-right-2",
+          attributes:
+          {
+            style: "vertical-align: middle;"
+          }
+        })}}
+        <!-- <p class="govuk-!-display-inline-block govuk-!-margin-0" style="vertical-align: middle;">
+          <span class="organisations-selected">None</span> selected
+        </p> -->
+      </div>
+    </div>
     {% endfor %}
     {% endif %}
 
@@ -168,6 +179,8 @@
     container.html(getSelectAllControllerHtml())
 
     container.each(function(){
+      let checkedCount = ''
+      let counter = $(this).closest('.multi-table-wrapper').find('.organisations-selected')
       let input = $(this).find('input')
       let tableCells = $(this).closest('table').find('td')
       let checkboxes = tableCells.find('input:checkbox')
@@ -175,15 +188,24 @@
       input.on('change', function(){
         let state = $(this).is(":checked")
         checkboxes.each(function(){
-          $(this).prop('checked', state);
+          $(this).prop('checked', state).trigger("change");
         })
       })
 
       checkboxes.each(function(){
         $(this).on('change', function(){
-          if($(this).not(":checked")){
+          if($(this).is(":checked")){
+            // input.prop('checked', true);
+          } else {
             input.prop('checked', false);
           }
+
+          if($(this).is(":checked")){
+            checkedCount++
+          } else {
+            checkedCount--
+          }
+          counter.html(checkedCount)
         })        
       })
     })

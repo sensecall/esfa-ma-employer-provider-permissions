@@ -27,3 +27,8 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/das-account-header";
 @import "components/das-header";
 @import "components/das-tabs";
+
+
+html {
+	scroll-behavior: auto
+}
