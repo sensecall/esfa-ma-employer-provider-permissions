@@ -18,11 +18,13 @@ Example usage:
 */
 
 const business_names = require('./business_names.json')
+const providers = require('./providers.json')
 
 module.exports = {
 
   // Insert values here
   	'businesses': business_names,
+  	'providers': providers,
   	'orgs-count': 5,
   	'name': 'Exoblue'
 }

@@ -27,6 +27,8 @@
 
 {% block content %}
 
+{{data['random-providers']}}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl">
@@ -44,8 +46,9 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     {% for provider in range(0, data['providers-count']) %}
+    {% set providerName = data['providers'][data['random-businesses'][loop.index0]]['name'] %}
     <table class="govuk-table govuk-!-margin-bottom-4 govuk-!-margin-top-4">
-      <caption class="govuk-table__caption govuk-heading-l">Coventry College</caption>
+      <caption class="govuk-table__caption govuk-heading-l">{{providerName}}</caption>
 
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
@@ -58,22 +61,21 @@
 
       <tbody class="govuk-table__body">
         {% for organisation in range(0, data['orgs-count']) %}
-        {% set name = data['businesses'][data['random-businesses'][loop.index0]] %}
-        {% set x = true if loop.index != 1 %}
+        {% set organisationName = data['businesses'][data['random-businesses'][loop.index0]] %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
             <div class="govuk-checkboxes govuk-checkboxes--small govuk-!-margin-0 govuk-!-padding-0">
               <div class="govuk-checkboxes__item govuk-!-margin-0 govuk-!-padding-0">
-                <input class="govuk-checkboxes__input govuk-!-margin-0 govuk-!-padding-0" id="organisation-{{loop.index}}" name="organisation" type="checkbox" value="{{name}}">
+                <input class="govuk-checkboxes__input govuk-!-margin-0 govuk-!-padding-0" id="organisation-{{loop.index}}" name="organisation" type="checkbox" value="{{organisationName}}">
                 <label class="govuk-label govuk-checkboxes__label" for="organisation-{{loop.index}}">
-                  <span class="govuk-visually-hidden">Select {{name}}</span>
+                  <span class="govuk-visually-hidden">Select {{organisationName}}</span>
                 </label>
               </div>
             </div>
           </td>
 
           <td class="govuk-table__cell">
-            {{name}}
+            {{organisationName}}
           </td>
 
           <td class="govuk-table__cell">
@@ -124,7 +126,7 @@
         let html = ''
         html += '<div class="govuk-checkboxes govuk-checkboxes--small app-multi-select__checkbox govuk-!-margin-0 govuk-!-padding-0">'
         html += '<div class="govuk-checkboxes__item govuk-!-margin-bottom-4 govuk-!-padding-0">'
-        html += '<input class="govuk-checkboxes__input govuk-!-margin-0 govuk-!-padding-0" id="organisation-{{loop.index}}" name="organisation" type="checkbox" value="{{name}}">'
+        html += '<input class="govuk-checkboxes__input govuk-!-margin-0 govuk-!-padding-0" id="organisation-select-all" name="organisation" type="checkbox" value="organisation-select-all">'
         html += '<label class="govuk-label govuk-checkboxes__label" for="organisation-{{loop.index}}">'
         html += '<span class="govuk-visually-hidden">Select {{name}}</span>'
         html += '</label>'
@@ -139,23 +141,23 @@
 
       container.each(function(){
         let input = $(this).find('input')
-      let tableCells = $(this).closest('table').find('td')
-      let checkboxes = tableCells.find('input:checkbox')
+        let tableCells = $(this).closest('table').find('td')
+        let checkboxes = tableCells.find('input:checkbox')
 
-      input.on('change', function(){
-        let state = $(this).is(":checked")
-        checkboxes.each(function(){
-          $(this).prop('checked', state);
+        input.on('change', function(){
+          let state = $(this).is(":checked")
+          checkboxes.each(function(){
+            $(this).prop('checked', state);
+          })
         })
-      })
 
-      checkboxes.each(function(){
-        $(this).on('change', function(){
-          if($(this).not(":checked")){
-            $(input).prop('checked', false);
-          }
-        })        
-      })
+        checkboxes.each(function(){
+          $(this).on('change', function(){
+            if($(this).not(":checked")){
+              input.prop('checked', false);
+            }
+          })        
+        })
       })
     })
   </script> 
