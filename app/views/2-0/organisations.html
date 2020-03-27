@@ -42,6 +42,36 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
+    {% if(data['orgs-count'] == 1) %}
+    <table class="govuk-table govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header govuk-!-width-one-third">Training provider name</th>
+          <th scope="col" class="govuk-table__header">Permissions</th>
+          <th scope="col" class="govuk-table__header" colspan="2"><span class="govuk-visually-hidden">Actions</span></th>
+        </tr>
+      </thead>
+
+      <tbody class="govuk-table__body">
+        {% for provider in range(0, data['providers-count']) %}
+        {% set providerName = data['providers'][data['random-providers'][loop.index0]]['name'] %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            {{providerName}}
+          </td>
+
+          <td class="govuk-table__cell">
+            <ul class="govuk-list govuk-!-margin-0">
+              <li class="govuk-!-margin-0">Add apprentice records</li>
+              <li class="govuk-!-margin-0">Recruit apprentices</li>
+            </ul>
+          </td>
+          <td class="govuk-table__cell"><a href="remove?name={{name}}">Change permissions<span class="govuk-visually-hidden"> for {{name}}</span></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
     {% for provider in range(0, data['providers-count']) %}
     {% set providerName = data['providers'][data['random-providers'][loop.index0]]['name'] %}
     <table class="govuk-table govuk-!-margin-bottom-4 govuk-!-margin-top-4">
@@ -88,10 +118,11 @@
     </table>
 
     {{govukButton({
-      text: "Set permissions for Coventry College",
+      text: "Set permissions for " + providerName,
       classes: "govuk-!-margin-bottom-8"
     })}}
     {% endfor %}
+    {% endif %}
 
     {% set pdHtml %}
     <p>
