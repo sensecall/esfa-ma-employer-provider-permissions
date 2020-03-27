@@ -19,19 +19,29 @@ function createProviderList(l, i) {
 	return x
 }
 
+function randomBusinesses(req, res){
+	let list = createBusinessList(req.session.data['businesses'].length, req.session.data['orgs-count'])
+	return list
+}
+
+function randomProviders(req, res){
+	let list = createProviderList(req.session.data['providers'].length, req.session.data['providers-count'])
+	return list
+}
+
 router.post('/config', (req, res, next) => {
-	req.session.data['random-businesses'] = createBusinessList(req.session.data['businesses'].length, req.session.data['orgs-count'])
-	req.session.data['random-providers'] = createProviderList(req.session.data['providers'].length, req.session.data['providers-count'])
+	req.session.data['random-businesses'] = randomBusinesses(req,res)
+	req.session.data['random-providers'] = randomProviders(req,res)
 	res.redirect('organisations')
 })
 
 router.get('/organisations', (req, res, next) => {
 	if(! req.session.data['random-businesses']){
-		req.session.data['random-businesses'] = createBusinessList(req.session.data['businesses'].length, req.session.data['orgs-count'])
+		req.session.data['random-businesses'] = randomBusinesses(req,res)
 	}
 
 	if(! req.session.data['random-providers']){
-		req.session.data['random-providers'] = createBusinessList(req.session.data['providers'].length, req.session.data['providers-count'])
+		req.session.data['random-providers'] = randomProviders(req, res)
 	}
 
 	res.render(`${req.version}/organisations`)

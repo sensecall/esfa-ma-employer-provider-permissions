@@ -26,9 +26,6 @@
 {% endblock %}
 
 {% block content %}
-
-{{data['random-providers']}}
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl">
@@ -46,7 +43,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     {% for provider in range(0, data['providers-count']) %}
-    {% set providerName = data['providers'][data['random-businesses'][loop.index0]]['name'] %}
+    {% set providerName = data['providers'][data['random-providers'][loop.index0]]['name'] %}
     <table class="govuk-table govuk-!-margin-bottom-4 govuk-!-margin-top-4">
       <caption class="govuk-table__caption govuk-heading-l">{{providerName}}</caption>
 
@@ -82,83 +79,83 @@
             <ul class="govuk-list govuk-!-margin-0">
               <li class="govuk-!-margin-0">Add apprentice records</li>
               <li class="govuk-!-margin-0">Recruit apprentices</li>
-            </td>
-            <td class="govuk-table__cell"><a href="remove?name={{name}}">Change permissions<span class="govuk-visually-hidden"> for {{name}}</span></a></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+            </ul>
+          </td>
+          <td class="govuk-table__cell"><a href="remove?name={{name}}">Change permissions<span class="govuk-visually-hidden"> for {{name}}</span></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-      {{govukButton({
-        text: "Set permissions for Coventry College",
-        classes: "govuk-!-margin-bottom-8"
-      })}}
-      {% endfor %}
+    {{govukButton({
+      text: "Set permissions for Coventry College",
+      classes: "govuk-!-margin-bottom-8"
+    })}}
+    {% endfor %}
 
-      {% set pdHtml %}
-      <p>
-        You can:
-      </p>
+    {% set pdHtml %}
+    <p>
+      You can:
+    </p>
 
-      <ul class="govuk-list govuk-list--bullet">
-        <li>update permissions for a provider at any time</li>
-        <li>review and make changes to anything a provider has done on your behalf</li>
-      </ul>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>update permissions for a provider at any time</li>
+      <li>review and make changes to anything a provider has done on your behalf</li>
+    </ul>
 
-      <p>
-        Your provider will not be able to access your account.
-      </p>
-      {% endset %}
+    <p>
+      Your provider will not be able to access your account.
+    </p>
+    {% endset %}
 
-      {{govukDetails({
-        summaryText: "How permissions work",
-        html: pdHtml
-      })}}
-    </div>
+    {{govukDetails({
+      summaryText: "How permissions work",
+      html: pdHtml
+    })}}
   </div>
+</div>
+{% endblock %}
 
-  {% endblock %}
+{% block pageScripts %}
+<script>
+  $(document).ready(function(){
+    function getSelectAllControllerHtml(){
+      let html = ''
+      html += '<div class="govuk-checkboxes govuk-checkboxes--small app-multi-select__checkbox govuk-!-margin-0 govuk-!-padding-0">'
+      html += '<div class="govuk-checkboxes__item govuk-!-margin-bottom-4 govuk-!-padding-0">'
+      html += '<input class="govuk-checkboxes__input govuk-!-margin-0 govuk-!-padding-0" id="organisation-select-all" name="organisation" type="checkbox" value="organisation-select-all">'
+      html += '<label class="govuk-label govuk-checkboxes__label" for="organisation-{{loop.index}}">'
+      html += '<span class="govuk-visually-hidden">Select {{name}}</span>'
+      html += '</label>'
+      html += '</div>'
+      html += '</div>'
 
-  {% block pageScripts %}
-  <script>
-    $(document).ready(function(){
-      function getSelectAllControllerHtml(){
-        let html = ''
-        html += '<div class="govuk-checkboxes govuk-checkboxes--small app-multi-select__checkbox govuk-!-margin-0 govuk-!-padding-0">'
-        html += '<div class="govuk-checkboxes__item govuk-!-margin-bottom-4 govuk-!-padding-0">'
-        html += '<input class="govuk-checkboxes__input govuk-!-margin-0 govuk-!-padding-0" id="organisation-select-all" name="organisation" type="checkbox" value="organisation-select-all">'
-        html += '<label class="govuk-label govuk-checkboxes__label" for="organisation-{{loop.index}}">'
-        html += '<span class="govuk-visually-hidden">Select {{name}}</span>'
-        html += '</label>'
-        html += '</div>'
-        html += '</div>'
+      return html
+    }
 
-        return html
-      }
+    let container = $('.app-multi-select__select-all-container')
+    container.html(getSelectAllControllerHtml())
 
-      let container = $('.app-multi-select__select-all-container')
-      container.html(getSelectAllControllerHtml())
+    container.each(function(){
+      let input = $(this).find('input')
+      let tableCells = $(this).closest('table').find('td')
+      let checkboxes = tableCells.find('input:checkbox')
 
-      container.each(function(){
-        let input = $(this).find('input')
-        let tableCells = $(this).closest('table').find('td')
-        let checkboxes = tableCells.find('input:checkbox')
-
-        input.on('change', function(){
-          let state = $(this).is(":checked")
-          checkboxes.each(function(){
-            $(this).prop('checked', state);
-          })
-        })
-
+      input.on('change', function(){
+        let state = $(this).is(":checked")
         checkboxes.each(function(){
-          $(this).on('change', function(){
-            if($(this).not(":checked")){
-              input.prop('checked', false);
-            }
-          })        
+          $(this).prop('checked', state);
         })
       })
+
+      checkboxes.each(function(){
+        $(this).on('change', function(){
+          if($(this).not(":checked")){
+            input.prop('checked', false);
+          }
+        })        
+      })
     })
-  </script> 
-  {% endblock %}
+  })
+</script> 
+{% endblock %}
