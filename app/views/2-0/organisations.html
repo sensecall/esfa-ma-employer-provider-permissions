@@ -81,7 +81,7 @@
               <li class="govuk-!-margin-0">Add apprentice records</li>
               <li class="govuk-!-margin-0">Recruit apprentices</li>
             </td>
-            <td class="govuk-table__cell"><a href="remove?name={{name}}">Change permissions</a></td>
+            <td class="govuk-table__cell"><a href="remove?name={{name}}">Change permissions<span class="govuk-visually-hidden"> for {{name}}</span></a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -137,8 +137,9 @@
       let container = $('.app-multi-select__select-all-container')
       container.html(getSelectAllControllerHtml())
 
-      let input = $(container).find('input')
-      let tableCells = container.closest('table').find('td')
+      container.each(function(){
+        let input = $(this).find('input')
+      let tableCells = $(this).closest('table').find('td')
       let checkboxes = tableCells.find('input:checkbox')
 
       input.on('change', function(){
@@ -154,6 +155,7 @@
             $(input).prop('checked', false);
           }
         })        
+      })
       })
     })
   </script> 
